@@ -141,11 +141,7 @@ func loggingHandler(next http.Handler) http.Handler {
 
 func acceptHandler(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("Accept") != "application/vnd.api+json" {
-			WriteError(w, ErrNotAcceptable)
-			return
-		}
-
+		
 		next.ServeHTTP(w, r)
 	}
 
@@ -154,10 +150,7 @@ func acceptHandler(next http.Handler) http.Handler {
 
 func contentTypeHandler(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("Content-Type") != "application/vnd.api+json" {
-			WriteError(w, ErrUnsupportedMediaType)
-			return
-		}
+		
 
 		next.ServeHTTP(w, r)
 	}
