@@ -5,7 +5,7 @@ import (
   "net"
   "golang.org/x/net/context"
   "google.golang.org/grpc"
-  pb "lib"
+  pb "push-par-clevercloud-customers.services.clever-cloud.com/app_f4cce119-a5d6-4397-b5cc-4cc77b5f4ead/lib"
 )
 
 const (
