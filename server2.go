@@ -299,7 +299,9 @@ func main() {
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 
-	appC := appContext{session.DB("bdzs4q4d4lwioez").Login("uppadx6j4eovlq2", "9fo1h74ezL2X06H5v9Uu")}
+	appC := appContext{session.DB("bdzs4q4d4lwioez")}
+    appC.db.Login("uppadx6j4eovlq2", "9fo1h74ezL2X06H5v9Uu")
+    
 	commonHandlers := alice.New(context.ClearHandler, loggingHandler, recoverHandler, acceptHandler)
 	router := NewRouter()
 	router.Get("/teas/:id", commonHandlers.ThenFunc(appC.teaHandler))
