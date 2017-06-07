@@ -292,14 +292,14 @@ func wrapHandler(h http.Handler) httprouter.Handle {
 }
 
 func main() {
-    session, err := mgo.Dial("uppadx6j4eovlq2:9fo1h74ezL2X06H5v9Uu@bdzs4q4d4lwioez-mongodb.services.clever-cloud.com")
+    session, err := mgo.Dial("bdzs4q4d4lwioez-mongodb.services.clever-cloud.com")
 	if err != nil {
 		panic(err)
 	}
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 
-	appC := appContext{session.DB("bdzs4q4d4lwioez")}
+	appC := appContext{session.DB("bdzs4q4d4lwioez").Login("uppadx6j4eovlq2", "9fo1h74ezL2X06H5v9Uu")}
 	commonHandlers := alice.New(context.ClearHandler, loggingHandler, recoverHandler, acceptHandler)
 	router := NewRouter()
 	router.Get("/teas/:id", commonHandlers.ThenFunc(appC.teaHandler))
